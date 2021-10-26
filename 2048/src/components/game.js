@@ -1,67 +1,41 @@
 import React from 'react'
-import times from 'lodash/times'
 import { useState } from 'react'
-
-import { GridSize } from '../constant'
 import { getNewTileSet } from '../logic/tile'
-
-import './game.css'
 import useMoveTile from '../logic/hook/moveTile'
+import Grid from './grid'
+import './game.css'
+import Tile from './tile'
+import Notification from './notification'
 
-function GridSlot() {
-    return (<div className='grid-slot'>1</div>)
-}
-
-export default function Game(props) {
+export default function Game() {
+    const [score, setScore] = useState(0);
     const [tileSet, setTileContext] = useState(getNewTileSet);
+    const [gameOver, setGameOver] = useState(false);
 
-    //console.log(tileSet);
+    useMoveTile(tileSet, setTileContext, setScore, setGameOver);
 
-    useMoveTile(tileSet, setTileContext);
-
-    const staticGridContainer = (
-        <div className='grid-container'>
-            {times(GridSize, (i) => (
-                <div className='grid-row' key={i}>
-                    {times(GridSize, (j) => (
-                        <GridSlot key={j}></GridSlot>
-                    ))}
-                </div>
-            ))}
-        </div>
-    )
-
-    const dynamicTileContainer = (
-        <div className='tile-container'>
-            {times(GridSize, (i) => (
-                <div className='grid-row' key={i}>
-                    {times(GridSize, (j) => {
-                        let matchItems = tileSet.filter(item => item.x === (i + 1) && item.y === (j + 1))
-                        if (matchItems && matchItems.length > 0) {
-                            for (const item of matchItems) {
-                                if (!item.isDisabled) {
-                                    return (<div className={`tile-slot tile-value-${item.value}`} key={j}>
-                                        1
-                                        <div className={`tile-content tile-value-${item.value} tile-value-text`}>
-                                            {item.value}
-                                        </div>
-                                    </div>);
-                                }
-                            }
-                        }
-                        else {
-                            return (<div className='tile-slot tile-empty' key={j}>1</div>);
-                        }
-                    })}
-                </div>
-            ))}
-        </div>
-    )
+    const style = {
+        marginTop: '40px',
+    }
 
     return (
-        <div className='game-container'>
-            {staticGridContainer}
-            {dynamicTileContainer}
+        <div style={style}>
+            <div className='game-control'>
+                <div>
+                    <div className='game-score'>
+                        My Score
+                    </div>
+                    <div className='game-score-box'>
+                        {score}
+                    </div>
+                </div>
+                <button className='header-start-button'>Start Game</button>
+            </div>
+            <div className='game-container'>
+                <Grid />
+                <Tile tileSet={tileSet}/>
+                <Notification isGameOver={gameOver}/>
+            </div>
         </div>
     )
 }

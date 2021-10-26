@@ -1,3 +1,4 @@
+import Grid from "../components/grid";
 import { GridSize } from "../constant";
 import { assert } from './assert';
 
@@ -25,15 +26,37 @@ export function makeTile(tileSet) {
 //Tile.makeTile = function(tileSet) {
     let tile;
 
+    // 모든 방문 체크 코드는 정확한 종료시점이 아니다.
+    // 위아래 좌우 이동 후 타일셋 변경이 없을 경우 게임이 종료되어야 한다.
+    // 종료 체크는 여기가 아니고 moveTile 에서 이루어져야 한다.
+    // 타일을 만들지 못했을 때 게임 오버로 바로 직행이 아니고, 지금 턴의 키입력이 무시될 뿐이다.
+
+    let visited = [];
+    for (let y  = 1; y <= GridSize; ++y) {
+      for (let x  = 1; x <= GridSize; ++x) {
+        visited.push({x, y});
+      }
+    }
+
     while (!tile || (tileSet && checkTileCollision(tileSet, tile))) {
-        tile = {
-            x: getInteger(1, GridSize),
-            y: getInteger(1, GridSize),
-            value: 2,
-            isNew: true,
-            isMerged: false,
-            isDisabled: false,
-        }
+      if (visited.length <= 0) {
+        tile = undefined;
+        break;
+      }
+
+      tile = {
+          x: getInteger(1, GridSize),
+          y: getInteger(1, GridSize),
+          value: 2,
+          isNew: false,
+          isMerged: undefined,
+          isDisabled: false,
+      }
+
+      // avoid no-loop-func
+      const t_tile = tile;
+
+      visited = visited.filter((item) => item.x !== t_tile.x || item.y !== t_tile.y);
     }
 
     return tile;
@@ -111,6 +134,12 @@ export function moveTile({ tileSet, x, y }) {
         sorted[i].value === sorted[i + 1]?.value
       ) {
         const tile = makeTile();
+
+        if (!tile) {
+          console.log("cancel move tile");
+          return undefined;
+        }
+
         tile.x = sorted[i].x;
         tile.y = sorted[i].y;
         tile.isMerged = true;

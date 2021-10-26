@@ -1,112 +1,44 @@
 .game-container {
     position: relative;
-    background-color: antiquewhite;
 }
 
-.grid-container {
-    background-color: cornsilk;
-    display: inline-block;
-    padding: 5px;
-    border-width: 1px;
-    border-radius: 10px;
+.header-start-button {
+    padding: 12px;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color:cadetblue;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    color: white
 }
 
-.grid-row {
+.header-start-button:hover {
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: white;
+    transform: translateY(-4px);
+}
+
+.game-control {
     display: flex;
-    /* justify-content: center; */
+    justify-content: space-around;
 }
 
-.grid-slot {
-    color: cornsilk;
-    border-width: 1px;
+.game-score-box {
+    border-width: 2px;
     border-style: solid;
-    border-color: darkgray;
-    /* border-radius: 5px; */
-    margin: 5px;
-    padding: 20px 25px 20px 25px;
+    border-color: cadetblue;
+    padding: 10px;
 }
 
-.tile-container {
-    position: absolute;
+.game-score {
+    border-width: 0px;
+    font-weight: bolder;
     padding: 5px;
-    border-width: 1px;
-    border-radius: 10px;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
-}
-
-.tile-slot {
-    position: relative;
-    border-width: 1px;
-    border-style: dashed;
-    /* border-color: transparent; */
-    margin: 5px;
-    padding: 20px 25px 20px 25px;
-}
-
-.tile-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -40%);
-}
-
-.tile-empty {
-    color: cornsilk
-}
-
-.tile-value-text {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 1.4em;
-}
-
-.tile-value-2 {
-    color:cadetblue;
-    background-color: aliceblue;
-}
-
-.tile-value-4 {
-    color:darkgrey;
-    background-color:azure;
-}
-
-.tile-value-8 {
-    color: gray;
-    background-color: bisque;
-}
-
-.tile-value-16 {
-    color: white;
-    background-color:burlywood;
-}
-
-.tile-value-32 {
-    color: white;
-    background-color:darksalmon;
-}
-
-.tile-value-64 {
-    color: white;
-    background-color:darksalmon;
-}
-
-.tile-value-128 {
-    color: white;
-    background-color:indianred;
-}
-
-.tile-value-256 {
-    color: white;
-    background-color:orangered;
-}
-
-.tile-value-1024 {
-    color: white;
-    background-color:cornflowerblue;
-}
-
-.tile-value-2048 {
-    color: white;
-    background-color:lightcoral;
+    background-color: cadetblue;
+    color: white
 }

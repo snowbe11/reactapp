@@ -1,0 +1,13 @@
+.body {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+.footer-container {
+    flex-grow: 1;
+    /* background-color: seashell; */
+    margin-top: 100px;
+    text-align: left;
+    vertical-align: bottom;
+}
