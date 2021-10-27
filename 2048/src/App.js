@@ -6,11 +6,19 @@ import Menu from './components/menu';
 import Footer from './components/footer';
 
 function App() {
+  const style={
+    display: 'table',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  }
+
   return (
     <div className="App">
       <Menu />
-      <Header/>
-      <Game/>
+      <div style={style}>
+        <Header/>
+        <Game/>
+      </div>
       <Footer />
     </div>
   );

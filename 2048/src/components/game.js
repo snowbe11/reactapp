@@ -18,6 +18,11 @@ export default function Game() {
         marginTop: '40px',
     }
 
+    const onNewStartGame = () => {
+        setGameOver(false);
+        setTileContext(getNewTileSet());
+    }
+
     return (
         <div style={style}>
             <div className='game-control'>
@@ -29,7 +34,7 @@ export default function Game() {
                         {score}
                     </div>
                 </div>
-                <button className='header-start-button'>Start Game</button>
+                <button className='header-start-button' onClick={onNewStartGame}>Start Game</button>
             </div>
             <div className='game-container'>
                 <Grid />

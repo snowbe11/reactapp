@@ -14,9 +14,10 @@ export default function Notification({isGameOver}) {
         transform: 'translateY(-50%)'
     }
 
-    return (
-        <div style={style}>
-            {isGameOver ? 'Game Over !' : ''}
-        </div>
-    )
+    if (isGameOver) {
+        return (<div style={style}>Game Over !</div>)
+    }
+    else {
+        return <React.Fragment></React.Fragment>
+    }
 }

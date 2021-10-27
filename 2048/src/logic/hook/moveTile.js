@@ -26,12 +26,38 @@ export default function useMoveTile(tileSet, setTileContext, setScore, setGameOv
                     setTileContext(newTileSet);
                 }
                 else {
+                    console.error('login fail, dead end !');
+                    setGameOver(true);
+                }
+
+                // check continue game ?
+                let tryInput = [
+                    { x:1, y:0 },
+                    { x:-1, y:0 },
+                    { x:0, y:1 },
+                    { x:0, y:-1 }
+                ]
+
+                let solutionExist = false;
+
+                tryInput.map((input) => {
+                    if (!solutionExist) {
+                        const x = input.x;
+                        const y = input.y;
+                        const tileSet = newTileSet;
+                        const lookupNextTileSet = moveTile({tileSet, x, y});
+                        if (lookupNextTileSet) {
+                            // 미리 이동시켜보고 게임이 진행되는지를 체크해야 한다.
+                        }
+                    }
+                })
+
+                if (!solutionExist) {
                     setGameOver(true);
                 }
             }
-            else {
-                setGameOver(true);
-            }
+
+            // else, ignore input
         }
 
         const moveLeft = () => moveAndAdd({x:-1, y:0});

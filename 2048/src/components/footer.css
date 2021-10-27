@@ -1,13 +1,8 @@
-.body {
-    display: flex;
-    flex-flow: column;
-    height: 100%;
-}
-
 .footer-container {
-    flex-grow: 1;
     /* background-color: seashell; */
+    color: white;
     margin-top: 100px;
     text-align: left;
-    vertical-align: bottom;
+    padding: 20px;
+    padding-bottom: auto;
 }

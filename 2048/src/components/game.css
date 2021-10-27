@@ -13,7 +13,7 @@
     transition: all 0.3s ease 0s;
     cursor: pointer;
     outline: none;
-    color: white
+    color: white;
 }
 
 .header-start-button:hover {
@@ -25,7 +25,9 @@
 
 .game-control {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 5px;
 }
 
 .game-score-box {
