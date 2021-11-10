@@ -1,0 +1,16 @@
+.title-container {
+    /* display: inline-block; */
+    text-align: left;
+}
+
+.title-header {
+    text-shadow: 0px 4px 8px rgba(66, 66, 66, 0.4);
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: -5px;
+}
+
+.title-auther {
+    color: lightgray;
+    text-align: left;
+    text-shadow: 0px 9px 10px rgba(46, 229, 157, 0.3);
+}

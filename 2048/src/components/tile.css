@@ -1,0 +1,92 @@
+.tile-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.tile-slot {
+    position: relative;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 6px;
+    border-color: cadetblue;
+    margin: 5px;
+    width: 80px;
+    height: 80px;
+}
+
+@keyframes appear {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+  
+.tile-new {
+    animation-name: appear;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-delay: 0.5s;
+    /* transition: color ease 1s 0s; */
+}
+
+.tile-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tile-value-text {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.4em;
+}
+
+.tile-value-2 {
+    color:cadetblue;
+    background-color: aliceblue;
+}
+
+.tile-value-4 {
+    color:darkgrey;
+    background-color:azure;
+}
+
+.tile-value-8 {
+    color: gray;
+    background-color: bisque;
+}
+
+.tile-value-16 {
+    color: white;
+    background-color:burlywood;
+}
+
+.tile-value-32 {
+    color: white;
+    background-color:darksalmon;
+}
+
+.tile-value-64 {
+    color: white;
+    background-color:darksalmon;
+}
+
+.tile-value-128 {
+    color: white;
+    background-color:indianred;
+}
+
+.tile-value-256 {
+    color: white;
+    background-color:orangered;
+}
+
+.tile-value-1024 {
+    color: white;
+    background-color:cornflowerblue;
+}
+
+.tile-value-2048 {
+    color: white;
+    background-color:lightcoral;
+}
