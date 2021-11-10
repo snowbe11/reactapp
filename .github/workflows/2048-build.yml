@@ -6,9 +6,11 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: build project
+      - name: save file to disk
         run: |
-          cd 2048
-          echo $pwd
-          npm install
-          npm build
+          echo 'xyzzy' > save_file.txt
+      - name: report file info
+        run: |
+          pwd
+          ls -la save_file.txt
+          echo "save_file.txt = `cat save_file.txt`"
