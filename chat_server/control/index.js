@@ -1,0 +1,5 @@
+// common namespace
+
+const reponse = () => {
+    
+}

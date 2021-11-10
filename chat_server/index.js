@@ -1,8 +1,8 @@
-//import { Event } from './src/event';
 
 const app = require('express')();
 const server = require('http').createServer(app);
 const cors = require('cors');
+const { chatManager } = require('./service');
 const socketio = require('socket.io')(server, {
     cors: {
         origin: '*',
@@ -10,11 +10,20 @@ const socketio = require('socket.io')(server, {
     }
 });
 
-const eventRelayReceived = (socket, socketio, eventName) => {
-    socket.on(eventName, eventData => socketio.emit(eventName, eventData))
-}
+// 단순한 루프백 핸들링
+const bindEventRelayReceived = (socket, socketio, eventName) => {
+    socket.on(eventName, eventData => socketio.emit(eventName, eventData));
+};
 
-const eventGetRank = (socket, socketio) => {
+const bindEventChatMessageReceived = (socket, socketio) => {
+    socket.on('message', ({name, message}) => {
+        chatManager.pushMessage({name, message});
+
+        socketio.emit('message', {name, message});
+    });
+};
+
+const bindEventGetRank = (socket, socketio) => {
     socket.on('get rank', eventData => socketio.emit('rank', 
         {
             message: 'rank from server',
@@ -27,12 +36,25 @@ const eventGetRank = (socket, socketio) => {
                 {name: 'stike-LD', score: 516},
             ]
         }
-    ))
-}
+    ));
+};
 
-socketio.on('connection', socket => eventRelayReceived(socket, socketio, 'message'));
-socketio.on('connection', socket => eventGetRank(socket, socketio));
+const onDisconnect = (socket) => {
+    socket.on('disconnect', () => {
+        console.log(`disconnected ${socket.id}`);
+    });
+};
+
+socketio.on('connection', socket => {
+    //console.log(socket);
+    console.log(`connected with ${socket.id}`);
+
+    // map callbacks
+    //bindEventRelayReceived(socket, socketio, 'message');
+    bindEventChatMessageReceived(socket, socketio);
+    bindEventGetRank(socket, socketio);
+});
 
 server.listen(4000, () => {
     console.log('listening on port 4000');
-})
+});
