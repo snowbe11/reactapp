@@ -1,0 +1,22 @@
+.grid-container {
+    background-color: cornsilk;
+    display: inline-block;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    /* padding: 10px 20px 10px 10px; */
+}
+
+.grid-row {
+    display: flex;
+}
+
+.grid-slot {
+    color: transparent;
+    border-width: 1px;
+    border-style: dashed;
+    border-radius: 6px;
+    border-color: darkgray;
+    margin: 5px;
+    width: 80px;
+    height: 80px;
+}

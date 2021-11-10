@@ -1,0 +1,46 @@
+.game-container {
+    position: relative;
+}
+
+.header-start-button {
+    padding: 12px;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color:cadetblue;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    color: white;
+}
+
+.header-start-button:hover {
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: white;
+    transform: translateY(-4px);
+}
+
+.game-control {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    padding: 5px;
+}
+
+.game-score-box {
+    border-width: 2px;
+    border-style: solid;
+    border-color: cadetblue;
+    padding: 10px;
+}
+
+.game-score {
+    border-width: 0px;
+    font-weight: bolder;
+    padding: 5px;
+    background-color: cadetblue;
+    color: white
+}
