@@ -6,10 +6,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: change directory
-        run: cd 2048
-      - name: install modules
-        run: npm install
       - name: build project
-        run: npm build
-          
+        run:
+          cd 2048
+          npm install
+          npm build
