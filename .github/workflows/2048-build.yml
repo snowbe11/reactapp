@@ -7,7 +7,8 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: build project
-        run:
+        run: |
           cd 2048
+          echo $pwd
           npm install
           npm build
