@@ -10,6 +10,11 @@ const socketio = require('socket.io')(server, {
     }
 });
 
+const apiRouter = require('./router');
+
+// express setting
+app.use('/api', apiRouter);
+
 // 단순한 루프백 핸들링
 const bindEventRelayReceived = (socket, socketio, eventName) => {
     socket.on(eventName, eventData => socketio.emit(eventName, eventData));
@@ -18,6 +23,10 @@ const bindEventRelayReceived = (socket, socketio, eventName) => {
 const bindEventChatMessageReceived = (socket, socketio) => {
     socket.on('message', ({name, message}) => {
         chatManager.pushMessage({name, message});
+
+        // debug
+        let context = chatManager.getMessage();
+        console.log(context);
 
         socketio.emit('message', {name, message});
     });
