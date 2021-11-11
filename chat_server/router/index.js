@@ -1,12 +1,15 @@
 const { Router } = require("express");
+const { rankManager } = require('../service');
 
 const router = Router();
 
 router.get('/rank', (request, response) => {
-    console.log(request);
-    console.log('client request');
+    console.log('client request rank');
 
-    response.send('hello world');
+    response.json({
+        result: 'success',
+        payload: rankManager.getRank()
+    });
 });
 
 module.exports = router;
