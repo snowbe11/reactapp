@@ -7,11 +7,16 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "eslint-plugin-import": "^2.25.3",
     "express": "^4.17.1",
     "nodemon": "^2.0.14",
     "socket.io": "^4.3.1"
   },
   "devDependencies": {
-    "concurrently": "^6.3.0"
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "concurrently": "^6.3.0",
+    "eslint": "^8.2.0",
+    "eslint-plugin-prettier": "^4.0.0"
   }
 }
