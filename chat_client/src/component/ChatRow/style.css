@@ -1,0 +1,27 @@
+.chat-row-container {
+  display: flex;
+  text-align: left;
+  margin-left: 3em;
+}
+
+.chat-row-potrait-container {
+  margin-right: 10px;
+}
+
+.chat-row-potrait {
+  width: 40px;
+  height: auto;
+  padding: 10px;
+  border-radius: 50%;
+  background-color: lightblue;
+}
+
+.chat-row-name-container {
+  margin-top: 3px;
+  margin-bottom: 6px;
+}
+
+.chat-row-name {
+  font-size: 1.1em;
+  font-weight: bold;
+}

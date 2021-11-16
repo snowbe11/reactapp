@@ -33,9 +33,9 @@ export default function Rank() {
 
   return (
     <div className="rank-container">
-      {rank.map((e) => {
+      {rank.map((e, i) => {
         return (
-          <div className="rank-container-element">
+          <div className="rank-container-element" key={i}>
             {e.name}, {e.score}
           </div>
         );

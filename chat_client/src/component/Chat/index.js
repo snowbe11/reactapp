@@ -1,35 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
 import ChatHistory from "../ChatHistory";
-import { TextField } from "@material-ui/core";
+import ChatInput from "../ChatInput";
 import "./style.css";
 
 export default function Chat({ socket, loginContext }) {
   const [chat, setChat] = useState([]);
-  //   const penddingMessage = useMemo(() => {
-  //     return message;
-  //   }, [message]);
-
-  const messageRef = useRef();
 
   useEffect(() => {
+    // 메시지 콜백은 한번만
     socket.on("message", ({ name, message }) => {
-      setChat([...chat, { name, message }]);
+      setChat((prevChat) => {
+        return [...prevChat, { name, message }];
+      });
     });
+
+    // 처음 페이지 진입시 채팅 기록을 요청
   }, []);
 
-  const submitText = (e) => {
-    e.preventDefault();
-
-    socket.emit("message", {
-      name: loginContext.name,
-      message: messageRef.current.value,
-    });
-
-    messageRef.current.value = "";
-  };
-
   return (
-    <div>
+    <div className="chat-app-container">
       <div>채팅방 이름</div>
       <div>
         <span>
@@ -44,24 +33,8 @@ export default function Chat({ socket, loginContext }) {
         </span>
       </div>
       <hr />
-      <div>
-        <ChatHistory {...chat} />
-        <form onSubmit={submitText}>
-          <div className="name-field">
-            <TextField name="name" value={loginContext.name} label="Name" />
-          </div>
-          <div>
-            <TextField
-              inputRef={messageRef}
-              name="message"
-              id="outlined-multiline-static"
-              variant="outlined"
-              label="Message"
-            />
-          </div>
-          <button>Send Message</button>
-        </form>
-      </div>
+      <ChatHistory context={chat} />
+      <ChatInput socket={socket} loginContext={loginContext} />
     </div>
   );
 }
