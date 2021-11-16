@@ -25,3 +25,9 @@
   font-size: 1.1em;
   font-weight: bold;
 }
+
+.chat-row-time {
+  margin-left: 1em;
+  color: gray;
+  font-size: 0.8em;
+}
