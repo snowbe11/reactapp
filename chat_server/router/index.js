@@ -1,7 +1,7 @@
-const { Router } = require("express");
+const express = require("express");
 const { rankManager, accountManager } = require("../service");
 
-const router = Router();
+const router = express.Router();
 
 router.get("/rank", (request, response) => {
   console.log("client request rank");
@@ -12,17 +12,25 @@ router.get("/rank", (request, response) => {
   });
 });
 
-router.post("/create", (request, response) => {
+router.post("/account", (request, response) => {
   const context = request.body;
 
-  console.log(`client request create account ${context}`);
+  console.log(`client request create account ${context.id}`);
 
-  accountManager.createAccount(context);
+  if (accountManager.isExists(context.id)) {
+    response.json({
+      status: "reject",
+      message: "id aleady exists",
+    });
+  } else {
+    accountManager.createAccount(context);
 
-  response.json({
-    status: "success",
-    payload: rankManager.getRank(),
-  });
+    response.json({
+      status: "success",
+    });
+
+    console.log(`account ${context.id} created success`);
+  }
 });
 
 module.exports = router;

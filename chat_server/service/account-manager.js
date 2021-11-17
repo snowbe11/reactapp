@@ -3,17 +3,14 @@ class AccountManager {
     this.account = [];
   }
 
-  createAccount = ({ id, name, password }) => {
-    console.log(`create account ${id}, ${name}`);
-
+  isExists = (id) => {
     let filteredResult = this.account.filter((e) => e.id == id);
 
-    if (filteredResult.length === 0) {
-      this.account.push({ id, name, password });
-      return true;
-    } else {
-      return false;
-    }
+    return filteredResult.length > 0;
+  };
+
+  createAccount = ({ id, name, password }) => {
+    this.account.push({ id, name, password });
   };
 
   getAccount = ({ id, password }) => {

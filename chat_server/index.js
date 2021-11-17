@@ -1,22 +1,23 @@
 const express = require("express");
 const app = express();
+
+// body parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// express setting
+const apiRouter = require("./router");
+app.use("/api", apiRouter);
+
 const server = require("http").createServer(app);
 
-const cors = require("cors");
+//const cors = require("cors");
 const socketio = require("socket.io")(server, {
   cors: {
     origin: "*",
     credentials: true,
   },
 });
-
-// express setting
-const apiRouter = require("./router");
-app.use("/api", apiRouter);
-
-// body parser
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
 // server content
 const { chatManager } = require("./service");

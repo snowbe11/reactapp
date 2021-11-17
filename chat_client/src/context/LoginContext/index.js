@@ -33,35 +33,33 @@ export const fetchLogin = createAsyncThunk(
   }
 );
 
-const tryCreate = async ({ id, name, password }) => {
+const tryCreate = async (id, name, password) => {
   const options = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      id: id,
-      name: name,
-      password: password,
+      id,
+      name,
+      password,
     }),
   };
 
-  console.log(options);
-
-  let reply = await fetch("api/create", options);
+  let reply = await fetch("/api/account/", options);
   let json = await reply.json();
 
   if (json.status === "success") {
     return [true, ""];
   } else {
-    return [false, json.payload];
+    return [false, json.message];
   }
 };
 
 export const fetchCreate = createAsyncThunk(
   "account/create",
   async ({ id, name, password }, { onReject }) => {
-    const [result, message] = await tryCreate({ id, name, password });
+    const [result, message] = await tryCreate(id, name, password);
     if (result) {
       return true;
     } else {
@@ -102,15 +100,8 @@ export const accountSlice = createSlice({
       state.status = "pedding";
       state.error = null;
     },
-    [fetchCreate.fulfilled]: (state, action) => {
-      const [success, data] = action.payload;
-      if (success) {
-        state.status = "idle";
-        state.name = data;
-      } else {
-        state.status = "fail";
-        state.name = data;
-      }
+    [fetchCreate.fulfilled]: (state) => {
+      state.status = "idle";
     },
     [fetchCreate.rejected]: (state, action) => {
       state.status = "fetchCreate.reject";

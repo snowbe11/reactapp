@@ -17,16 +17,14 @@ export default function CreateAccount() {
       password: passwordRef.current.value,
     };
 
-    console.log("submit create account");
-    console.log(account_data);
-
     let fetchResult = await dispatch(
       fetchCreate(account_data, (message) => {
         console.log(message);
       })
     ).unwrap();
 
-    console.log(fetchResult);
+    if (fetchResult) {
+    }
   };
 
   const accountNameRef = useRef();
