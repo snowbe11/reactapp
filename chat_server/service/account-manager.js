@@ -4,8 +4,7 @@ class AccountManager {
   }
 
   isExists = (id) => {
-    let filteredResult = this.account.filter((e) => e.id == id);
-
+    let filteredResult = this.account.filter((e) => e.id === id);
     return filteredResult.length > 0;
   };
 
@@ -13,14 +12,16 @@ class AccountManager {
     this.account.push({ id, name, password });
   };
 
-  getAccount = ({ id, password }) => {
-    let account = this.account.filter((e) => e.id == id);
+  auth = (id, password) => {
+    let accountMatched = this.account.filter((e) => e.id === id);
 
-    if (account && account.password === password) {
-      return account.name;
-    } else {
-      return "";
+    for (const account of accountMatched) {
+      if (account.password === password) {
+        return account.name;
+      }
     }
+
+    return undefined;
   };
 }
 

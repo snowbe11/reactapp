@@ -33,4 +33,32 @@ router.post("/account", (request, response) => {
   }
 });
 
+router.post("/login", (request, response) => {
+  const context = request.body;
+
+  console.log(`'${context.id}' request login`);
+
+  if (accountManager.isExists(context.id)) {
+    const accountName = accountManager.auth(context.id, context.password);
+    if (accountName) {
+      response.json({
+        status: "success",
+        name: accountName,
+      });
+
+      console.log(`${context.id} login success`);
+    } else {
+      response.json({
+        status: "reject",
+        name: "auth failed",
+      });
+    }
+  } else {
+    response.json({
+      status: "reject",
+      message: "id not exists",
+    });
+  }
+});
+
 module.exports = router;

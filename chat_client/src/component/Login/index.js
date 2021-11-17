@@ -1,39 +1,38 @@
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { TextField, Button } from "@material-ui/core";
-import { createAccount } from "../../reducer/account";
-import "./style.css";
+import { TextField, Button, Link } from "@material-ui/core";
+import { login } from "../../reducer/account";
+import { Navigate } from "react-router-dom";
 
-export default function CreateAccount() {
+export default function Login() {
   const [result, setResult] = useState(false);
   const dispatch = useDispatch();
 
   const submitContext = (e) => {
     e.preventDefault();
 
-    createAccount(dispatch, {
-      id: accountNameRef.current.value,
-      name: nameRef.current.value,
-      password: passwordRef.current.value,
+    login(dispatch, {
+      id: idRef.current.value,
+      password: pwRef.current.value,
     }).then((result) => {
+      console.log(`로그인 결과 ${result}`);
       setResult(result);
     });
   };
 
-  const accountNameRef = useRef();
-  const nameRef = useRef();
-  const passwordRef = useRef();
+  const idRef = useRef();
+  const pwRef = useRef();
 
   return (
     <div className="account-input-container">
       <div className="accout-input-caption">
-        <div>계정 정보를 입력하세요.</div>
+        <div>로그인 정보를 입력하세요.</div>
       </div>
       <form onSubmit={submitContext}>
         <div className="account-create-form">
           <div className="account-create-form-content">
             <TextField
-              inputRef={accountNameRef}
+              inputRef={idRef}
               name="accountName"
               id="outlined-multiline-static"
               variant="outlined"
@@ -42,16 +41,7 @@ export default function CreateAccount() {
           </div>
           <div className="account-create-form-content">
             <TextField
-              inputRef={nameRef}
-              name="name"
-              id="outlined-multiline-static"
-              variant="outlined"
-              label="Display Name"
-            />
-          </div>
-          <div className="account-create-form-content">
-            <TextField
-              inputRef={passwordRef}
+              inputRef={pwRef}
               name="password"
               id="outlined-multiline-static"
               variant="outlined"
@@ -59,11 +49,12 @@ export default function CreateAccount() {
             />
           </div>
           <div className="account-button-group">
-            <Button onClick={submitContext}>생성</Button>
+            <Button onClick={submitContext}>로그인</Button>
+            <Link href="/account">계정생성</Link>
           </div>
-          {result && <div>계정을 생성했습니다.</div>}
         </div>
       </form>
+      {result && <Navigate to="/" />}
     </div>
   );
 }
