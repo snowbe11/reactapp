@@ -1,0 +1,24 @@
+.chat-app-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-channel-title {
+  font-size: 1em;
+  font-weight: bold;
+  text-align: left;
+  padding: 3px;
+}
+
+.chat-header-container {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 1em;
+  padding-right: 1em;
+  color: lightblue;
+}
+
+.chat-header-item {
+  margin-right: 1em;
+}

@@ -1,0 +1,27 @@
+.account-input-container {
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  border-width: 1px;
+  border-style: dashed;
+  border-radius: 5%;
+  background-color: white;
+  padding: 10px;
+}
+
+.accout-input-caption {
+  padding: 5px 5px 10px 5px;
+}
+
+.account-create-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-create-form-content {
+  margin: 2px;
+}
+
+.account-button-group {
+  padding: 10px;
+}

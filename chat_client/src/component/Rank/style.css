@@ -1,0 +1,9 @@
+.rank-container {
+  background-color: linen;
+  padding: 1em;
+}
+
+.rank-container-element {
+  text-align: left;
+  padding: 4px;
+}
