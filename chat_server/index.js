@@ -1,7 +1,8 @@
-const app = require("express")();
+const express = require("express");
+const app = express();
 const server = require("http").createServer(app);
+
 const cors = require("cors");
-const { chatManager } = require("./service");
 const socketio = require("socket.io")(server, {
   cors: {
     origin: "*",
@@ -9,10 +10,16 @@ const socketio = require("socket.io")(server, {
   },
 });
 
-const apiRouter = require("./router");
-
 // express setting
+const apiRouter = require("./router");
 app.use("/api", apiRouter);
+
+// body parser
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// server content
+const { chatManager } = require("./service");
 
 // 단순한 루프백 핸들링
 const bindEventRelayReceived = (socket, socketio, eventName) => {
