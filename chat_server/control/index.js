@@ -1,5 +1,0 @@
-// common namespace
-
-const reponse = () => {
-    
-}
