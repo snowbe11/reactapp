@@ -33,7 +33,7 @@ passport.use(
         if (user) {
           console.log(`passport accept as ${user}`);
 
-          return done(null, user);
+          return done(null, { id: id, name: user });
         } else {
           console.log(`passport ivalid password`);
 

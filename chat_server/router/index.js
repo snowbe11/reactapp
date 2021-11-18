@@ -69,13 +69,9 @@ router.post(
     session: false,
   }),
   (req, res) => {
-    console.log(`passport response to ${req.body.id}`);
+    console.log(`passport response req.user ${req.user.id}, ${req.user.name}`);
 
-    // 세션을 사용하지 않기 때문에 송수신 정보에 한계가 있다.
-    // 근데 매뉴얼에는 되는 것 처럼 보이는데 vertify 함수를 더 건들어보자
-    console.log(`req.user ${req.user.id}, ${req.user.password}`);
-
-    res.json({ status: "success", payload: { id: req.body.id } });
+    res.json({ status: "success", payload: { id: req.user.name } });
   }
 );
 
