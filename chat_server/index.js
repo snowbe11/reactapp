@@ -5,7 +5,23 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// express setting
+const { passport } = require("./service");
+
+// passport
+app.use(passport.initialize());
+//app.use(passport.session());
+
+app.use((req, res, next) => {
+  console.log("app.use custom callback");
+  console.log(`isAuthenticated ${req.isAuthenticated()}`);
+  console.log(`currentUser ${req.user}`);
+
+  res.locals.isAuthenticated = req.isAuthenticated();
+  res.locals.currentUser = req.user;
+  next();
+});
+
+// router setting
 const apiRouter = require("./router");
 app.use("/api", apiRouter);
 
@@ -20,6 +36,7 @@ const socketio = require("socket.io")(server, {
 });
 
 // server content
+
 const { chatManager } = require("./service");
 
 // 단순한 루프백 핸들링
@@ -32,6 +49,7 @@ const bindEventChatMessageReceived = (socket, socketio) => {
     chatManager.pushMessage({ name, message });
 
     // debug
+    console.log("socket.on message");
     let context = chatManager.getMessage();
     console.log(context.slice(-1)[0]);
 

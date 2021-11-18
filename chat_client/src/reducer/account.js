@@ -14,11 +14,12 @@ const fetchLogin = async (id, password) => {
     }),
   };
 
-  let reply = await fetch("api/login", options);
+  let reply = await fetch("api/passport", options);
+  //let reply = await fetch("api/login", options);
   let json = await reply.json();
 
   if (json.status === "success") {
-    return [true, json.payload];
+    return [true, json.payload.id];
   } else {
     return [false];
   }
@@ -133,6 +134,7 @@ export const createAccount = async (dispatch, { id, name, password }) => {
 
   let fetchResult = await dispatch(
     asyncCreateAccount(account_data, (message) => {
+      console.log("fetchResult fail");
       console.log(message);
     })
   ).unwrap();
