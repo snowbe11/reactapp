@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require("express-session");
 const app = express();
 
 // body parser
@@ -8,16 +9,28 @@ app.use(express.urlencoded({ extended: false }));
 const { passport } = require("./service");
 
 // passport
-app.use(passport.initialize());
-//app.use(passport.session());
+app.use(
+  session({
+    secret: "@react",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+// call back to all
 app.use((req, res, next) => {
-  console.log("app.use custom callback");
-  console.log(`isAuthenticated ${req.isAuthenticated()}`);
-  console.log(`currentUser ${req.user}`);
+  console.log(
+    `app.use custom callback, isAuthenticated=${req.isAuthenticated()} currentUser=${JSON.stringify(
+      req.user
+    )}`
+  );
 
   res.locals.isAuthenticated = req.isAuthenticated();
   res.locals.currentUser = req.user;
+
   next();
 });
 
