@@ -15,6 +15,8 @@ export default function Chat({ socket, loginContext }) {
     });
 
     // 처음 페이지 진입시 채팅 기록을 요청
+
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -6,6 +6,7 @@ import { Navigate } from "react-router-dom";
 
 export default function Login() {
   const [result, setResult] = useState(false);
+  const [serverMessage, setServerMessage] = useState("");
   const dispatch = useDispatch();
 
   const submitContext = (e) => {
@@ -14,14 +15,24 @@ export default function Login() {
     login(dispatch, {
       id: idRef.current.value,
       password: pwRef.current.value,
-    }).then((result) => {
-      console.log(`로그인 결과 ${result}`);
+    }).then(({ result, displayName, message }) => {
       setResult(result);
+
+      if (result) {
+        console.log(`${displayName} 로그인`);
+      } else {
+        setServerMessage(message);
+      }
     });
   };
 
   const idRef = useRef();
   const pwRef = useRef();
+
+  // redirect to
+  if (result) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <div className="account-input-container">
@@ -53,8 +64,8 @@ export default function Login() {
             <Link href="/account">계정생성</Link>
           </div>
         </div>
+        <div>{serverMessage}</div>
       </form>
-      {result && <Navigate to="/" />}
     </div>
   );
 }
