@@ -6,15 +6,15 @@ const accountManager = require("./account-manager");
 passport.serializeUser((user, done) => {
   // 세션에 저장
 
-  console.log(`serializeUser ${user.id}`);
-  done(null, user.id);
+  console.log(`serializeUser ${JSON.stringify(user)}`);
+  done(null, user);
 });
 
-passport.deserializeUser((id, done) => {
+passport.deserializeUser((user, done) => {
   // 세션으로부터 값을 가져오는
 
-  console.log(`deserializeUser ${id}`);
-  done(null, id);
+  console.log(`deserializeUser ${JSON.stringify(user)}`);
+  done(null, user);
 });
 
 passport.use(
@@ -37,11 +37,11 @@ passport.use(
         } else {
           console.log(`passport ivalid password`);
 
-          return done(null, false, { message: "Incorrect password" });
+          return done(null, null, { message: "Incorrect password" });
         }
       } else {
-        console.log(`passport reject password`);
-        return done({ message: "account not exists" });
+        console.log(`passport account not found`);
+        return done("Account not exists");
       }
     }
   )

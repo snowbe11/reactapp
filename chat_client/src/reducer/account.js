@@ -19,9 +19,9 @@ const fetchLogin = async (id, password) => {
   let json = await reply.json();
 
   if (json.status === "success") {
-    return [true, json.payload.id];
+    return { result: true, displayName: json.payload.id };
   } else {
-    return [false];
+    return { result: false, message: json.message };
   }
 };
 
@@ -84,15 +84,16 @@ export const accountSlice = createSlice({
       state.status = "pedding";
     },
     [asyncLogin.fulfilled]: (state, action) => {
-      const [success, data] = action.payload;
+      const { result, displayName } = action.payload;
 
-      if (success) {
+      if (result) {
         state.status = "idle";
+        state.name = displayName;
       } else {
         state.status = "fail";
       }
 
-      state.name = data;
+      console.log(`accountSlice asyncLogin.fulfilled ${JSON.stringify(state)}`);
     },
     [asyncLogin.rejected]: (state) => {
       state.status = "fetchLogin.reject";
